@@ -28,7 +28,6 @@ var Albums = React.createClass({
     return (
       <Section className="albums">
         {albums.map((album, i) => {
-          console.log(album.id)
           var url = "https://bandcamp.com/EmbeddedPlayer/album=" + album.id +  "/size=large/bgcol=212225/linkcol=ffffff/transparent=true/";
           return (
             <iframe key={i} className="album" src={url} seamless />
@@ -78,7 +77,6 @@ var Nav = React.createClass({
     this.props.callback(name);
   },
   render () {
-    console.log(navLinksMobile)
     var self = this;
     var links = this.state.desktopLayout ? navLinks : navLinksMobile;
     return (
