@@ -1,0 +1,313 @@
+@import 'bourbon';
+
+// Variables
+$fontSans: "brandon-grotesque", sans-serif;
+$fontSerif: "jubilat", serif;
+$headerSize: 40%;
+$paddingH: 4vw;
+$paddingV: 3vw;
+$mobileWSm: 480px;
+$mobileWMed: 1024px;
+$bsBreakMed: 992px;
+$colorLight: #F5F4F3;
+$colorHighlight: #28ca97;
+$colorDark: #333;
+$radius: 3px;
+$sectionMaxW: 720px;
+
+body {
+  font-family: $fontSerif;
+  font-size: 16px;
+}
+
+html, body, #myApp {
+  height: 100%;
+  position: relative;
+}
+
+.footer {
+  background-color: darken($colorLight, 5%);
+  border-top: 6px solid darken($colorLight, 16%);
+  font-family: $fontSans;
+  font-weight: bold;
+  padding: $paddingV $paddingH;
+  text-transform: uppercase;
+
+  &Contain {
+    @include display(flex);
+  }
+  &Info {
+    font-size: 16px;
+  }
+  .social {
+    margin-left: auto;
+  }
+}
+
+.header {
+  background-color: #000;
+  background-position: center;
+  background-size: cover;
+  color: $colorLight;
+  font-family: $fontSans;
+  height: 100%;
+  min-width: $headerSize;
+  position: absolute;
+  text-align: center;
+
+  &Contain {
+    @include background-image(linear-gradient(transparent 0, black 70%));
+    bottom: 0;
+    padding: 40% 10% 10%;
+    position: absolute;
+    width: 100%;
+    z-index: 3;
+  }
+  &Heading {
+    font-size: 4vw;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  &Subheading {
+    font-size: 1.5vw;
+    margin: .5vh 0;
+    text-transform: uppercase;
+  }
+}
+
+.item {
+  padding: $paddingV 0;
+
+  &Btn {
+    @include transition(all .1s ease-in-out);
+    background-color: $colorDark;
+    border-color: darken($colorDark, 10%);
+    color: $colorLight;
+    font-size: 2rem;
+    margin-right: 10px;
+
+    &:hover {
+      background-color: $colorHighlight;
+      border-color: darken($colorHighlight, 10%);
+      color: $colorLight;
+    }
+  }
+  &Btns {
+    padding-top: $paddingV/2;
+  }
+  &Details {
+    padding: $paddingV $paddingH;
+  }
+  &Heading {
+    font-family: $fontSans;
+    font-size: 3rem;
+    font-weight: bold;
+    padding-bottom: $paddingV/3;
+    text-transform: uppercase;
+  }
+  &Img {
+    @include background-image(linear-gradient(transparent 0, darken($colorLight, 10%) 70%));
+    padding: $paddingV $paddingH 0;
+    width: 100%;
+
+    &File {
+      height: auto;
+      max-width: $sectionMaxW;
+      width: 100%;
+    }
+  }
+}
+
+.main {
+  height: 100%;
+  overflow-y: scroll;
+  padding-left: $headerSize;
+  width: 100%;
+  z-index: 2;
+
+  &Container {
+    background: $colorLight;
+    margin: 0;
+    // max-width: $sectionMaxW;
+    width: 100%;
+  }
+}
+
+.nav {
+  @include display(flex);
+  font-family: $fontSerif;
+  // padding: 0 $paddingH;
+
+  &Link {
+    color: $colorHighlight;
+    display: block;
+    font-size: 1.8rem;
+    padding: $paddingV*.66 0 0;
+    text-align: center;
+    width: 100%;
+
+    &:hover {
+      color: #fff;
+      text-decoration: none;
+    }
+  }
+}
+
+.section {
+  padding: $paddingV $paddingH;
+
+  p {
+    font-size: 2rem;
+    line-height: 3.4rem;
+    max-width: $sectionMaxW;
+
+    a {
+      color: $colorHighlight;
+
+      &:hover {
+        color: darken($colorHighlight, 10%);
+        text-decoration: none;
+      }
+    }
+  }
+  &.portfolio {
+    padding: 0;
+
+    .section {
+      &Heading {
+        padding: $paddingV $paddingH;
+      }
+    }
+  }
+  &Heading {
+    font-family: $fontSans;
+    font-size: 4rem;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+}
+
+
+.social {
+  &Link {
+    color: $colorDark;
+    font-size: 2.8rem;
+    padding: 8px;
+
+    &:hover {
+      color: $colorHighlight;
+      cursor: pointer;
+    }
+    &:first-child {
+      padding-left: none;
+    }
+    &:last-child {
+      padding-right: none;
+    }
+  }
+}
+
+.wrap {
+  @include display(flex);
+  height: 100%;
+}
+
+@media screen and (max-width : $mobileWSm) {
+  .header {
+    background-image: url('./img/me-sm.jpg');
+  }
+}
+@media screen and (max-width : $mobileWMed) {
+  .wrap {
+    display: block;
+  }
+  .header {
+    height: 80vh;
+    max-height: 360px;
+    position: relative;
+    width: 100%;
+
+    &Contain {
+      padding: 4vh 2vw 0;
+    }
+    &Heading {
+      font-size: 10vw;
+      margin-bottom: 0;
+    }
+    &Subheading {
+      font-size: 3.6vw;
+      margin-bottom: 0;
+    }
+  }
+  .item {
+    &Btn {
+      border-radius: 0;
+      border-width: 1px;
+      border-top-width: 0;
+      display: block;
+
+      &:first-child {
+        border-top-width: 1px;
+        border-top-left-radius: $radius;
+        border-top-right-radius: $radius;
+      }
+      &:last-child {
+        border-bottom-left-radius: $radius;
+        border-bottom-right-radius: $radius;
+      }
+    }
+  }
+  .main {
+    height: auto;
+    overflow-y: visible;
+    padding-left: 0;
+    width: 100%;
+
+    &Contain {
+      max-width: 100%;
+    }
+  }
+  .nav {
+    &Link {
+      font-size: 4vw;
+      padding: $paddingV*1.66 $paddingH;
+    }
+  }
+  .section {
+    padding: $paddingV*1.66 $paddingH*1.66;
+
+    &Heading {
+      font-size: 8vw;
+    }
+  }
+}
+
+@media screen and (min-width : $mobileWSm) and (max-width : $mobileWMed) {
+  .header {
+    background-image: url('./img/me-med.jpg');
+  }
+}
+
+@media screen and (min-width: $mobileWMed) {
+  body {
+    // font-size: 18px;
+  }
+  .header {
+    background-image: url('./img/me-lg.jpg');
+  }
+  .main {
+    &Contain {
+      // max-width: 880px;
+    }
+  }
+}
+@media screen and (min-width: 1200px) {
+}
+
+
+//  Overriding Bootstrap breakpoints
+@media screen and (min-width: $bsBreakMed) {
+  .container {
+
+  }
+}
