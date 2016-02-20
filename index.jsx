@@ -189,7 +189,7 @@ export class App extends React.Component {
                 description="For Mass Hollow, I designed and created this responsive, single-page site for musician Mass Hollow. Built using React, WebPack, and Sass."
                 btns={[
                   { label: "masshollow.com", url: "http://masshollow.com" },
-                  { label: "GitHub repo", url: "https://github.com/dancormier/react-webpack-babel/tree/mass-hollow" }
+                  { label: "GitHub repo", url: "https://github.com/dancormier/react-webpack-babel/tree/masshollow" }
                 ]}
                 img={require("./img/mass-hollow.png")}/>
             </Section>
