@@ -16,7 +16,7 @@ var {
   videos
 } = require('./data.js');
 
-var desktopWidthMin = 960;
+var isMobile = typeof window.orientation !== 'undefined'
 
 var Albums = React.createClass({
   getInitialState: function() {
@@ -63,22 +63,12 @@ export class Header extends React.Component {
 }
 
 var Nav = React.createClass({
-  getInitialState: function() {
-    return {
-      desktopLayout: true
-    }
-  },
-  componentDidMount: function() {
-    this.setState({
-      desktopLayout: window.innerWidth > desktopWidthMin,
-    });
-  },
   active : function(name) {
     this.props.callback(name);
   },
   render () {
     var self = this;
-    var links = this.state.desktopLayout ? navLinks : navLinksMobile;
+    var links = !isMobile ? navLinks : navLinksMobile;
     return (
       <nav className="nav">
         {links.map((link, i) => {
@@ -123,10 +113,11 @@ var Videos = React.createClass({
   },
   componentDidMount: function() {
     var self = this;
+    console.log(Math.abs(self.refs.videosFeature.getBoundingClientRect().height))
     setTimeout(() => {
+      console.log(Math.abs(self.refs.videosFeature.getBoundingClientRect().height))
       self.setState({
         ready: true,
-        desktopLayout: window.innerWidth > desktopWidthMin,
         videoOpts: {
           height: Math.abs(self.refs.videosFeature.getBoundingClientRect().height),
           width: Math.abs(self.refs.videosFeature.getBoundingClientRect().width),
@@ -147,7 +138,7 @@ var Videos = React.createClass({
   },
   render () {
     var self = this;
-    let { ready, videoOpts, desktopLayout } = this.state;
+    let { ready, videoOpts } = this.state;
     var featureDetails = [
       {
         heading: "Now Playing",
@@ -161,30 +152,33 @@ var Videos = React.createClass({
     ];
     return (
       <Section className="videos">
-        <div className="videosFeature">
-          <div className="videosVideo" ref="videosFeature">
-            {ready && videoOpts && desktopLayout ?
-              <YouTube videoId={this.state.videoId} opts={this.state.videoOpts} />
-            : <span/>
-            }
+        {!isMobile ?
+          <div className="videosFeature">
+            <div className="videosVideo" ref="videosFeature">
+              {ready && videoOpts ?
+                <YouTube videoId={this.state.videoId} opts={this.state.videoOpts} />
+              : <span/>
+              }
+            </div>
+            <div className="videosDetails">
+              {featureDetails.map((detail, i) => {
+                return detail.text ? (
+                  <div key={i} className="videosDetail">
+                    <div className="videosDetailHeading">{detail.heading}</div>
+                    <a className="videosDetailText" href={detail.url} target="_blank">{detail.text}</a>
+                  </div>
+                ) : ""
+              } )}
+            </div>
           </div>
-          <div className="videosDetails">
-            {featureDetails.map((detail, i) => {
-              return detail.text ? (
-                <div key={i} className="videosDetail">
-                  <div className="videosDetailHeading">{detail.heading}</div>
-                  <a className="videosDetailText" href={detail.url} target="_blank">{detail.text}</a>
-                </div>
-              ) : ""
-            } )}
-          </div>
-        </div>
+        : <span/>
+        }
         <div className="videosList">
           {videos.map((video, i) => {
             var bgImg = {backgroundImage: "url("+video.img+")"};
             var active = self.state.video === video.name ? " active" : "";
-            var href = desktopLayout ? "#" : "https://www.youtube.com/watch?v="+video.id;
-            var target = desktopLayout ? "_self" : "_blank";
+            var href = !isMobile ? "#" : "https://www.youtube.com/watch?v="+video.id;
+            var target = !isMobile ? "_self" : "_blank";
 
             return (
               <a key={i} className={"video" + active} href={href} target={target}>

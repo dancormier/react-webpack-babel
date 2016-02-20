@@ -310,15 +310,15 @@ html, body, #myApp {
       }
     }
     &Details {
-      @include display(flex);
+      display: none;
       width: 100%;
     }
     &Feature {
-      display: none;
-      height: auto;
+      display: block;
+      height: 50vw;
     }
     &Video {
-      height: 66vw;
+      height: 100%;
       width: 100%;
     }
   }
