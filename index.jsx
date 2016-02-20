@@ -8,7 +8,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import YouTube from 'react-youtube';
 
-var { albums, navLinks, social, videos } = require('./data.js');
+var {
+  albums,
+  navLinks,
+  navLinksMobile,
+  social,
+  videos
+} = require('./data.js');
+
+var desktopWidthMin = 960;
 
 var Albums = React.createClass({
   getInitialState: function() {
@@ -55,15 +63,27 @@ export class Header extends React.Component {
   }
 }
 
-export class Nav extends React.Component {
-  active (name) {
-    this.props.callback(name)
-  }
+var Nav = React.createClass({
+  getInitialState: function() {
+    return {
+      desktopLayout: true
+    }
+  },
+  componentDidMount: function() {
+    this.setState({
+      desktopLayout: window.innerWidth > desktopWidthMin,
+    });
+  },
+  active : function(name) {
+    this.props.callback(name);
+  },
   render () {
+    console.log(navLinksMobile)
     var self = this;
+    var links = this.state.desktopLayout ? navLinks : navLinksMobile;
     return (
       <nav className="nav">
-        {navLinks.map((link, i) => {
+        {links.map((link, i) => {
           var active = self.props.active === link.name ? " active" : ""
           return (
             <a
@@ -79,7 +99,7 @@ export class Nav extends React.Component {
       </nav>
     );
   }
-}
+});
 
 export class Section extends React.Component {
   render () {
@@ -108,7 +128,7 @@ var Videos = React.createClass({
     setTimeout(() => {
       self.setState({
         ready: true,
-        showFeature: window.innerWidth > 960,
+        desktopLayout: window.innerWidth > desktopWidthMin,
         videoOpts: {
           height: Math.abs(self.refs.videosFeature.getBoundingClientRect().height),
           width: Math.abs(self.refs.videosFeature.getBoundingClientRect().width),
@@ -129,7 +149,7 @@ var Videos = React.createClass({
   },
   render () {
     var self = this;
-    let { ready, videoOpts, showFeature } = this.state;
+    let { ready, videoOpts, desktopLayout } = this.state;
     var featureDetails = [
       {
         heading: "Now Playing",
@@ -145,7 +165,7 @@ var Videos = React.createClass({
       <Section className="videos">
         <div className="videosFeature">
           <div className="videosVideo" ref="videosFeature">
-            {ready && videoOpts && showFeature ?
+            {ready && videoOpts && desktopLayout ?
               <YouTube videoId={this.state.videoId} opts={this.state.videoOpts} />
             : <span/>
             }
@@ -163,10 +183,13 @@ var Videos = React.createClass({
         </div>
         <div className="videosList">
           {videos.map((video, i) => {
-            var bgImg = {backgroundImage: "url("+video.img+")"}
-            var active = self.state.video === video.name ? " active" : ""
+            var bgImg = {backgroundImage: "url("+video.img+")"};
+            var active = self.state.video === video.name ? " active" : "";
+            var href = desktopLayout ? "#" : "https://www.youtube.com/watch?v="+video.id;
+            var target = desktopLayout ? "_self" : "_blank";
+
             return (
-              <div key={i} className={"video" + active}>
+              <a key={i} className={"video" + active} href={href} target={target}>
                 <div
                   className="videoLink"
                   style={bgImg}
@@ -176,7 +199,7 @@ var Videos = React.createClass({
                     { video.text }
                   </div>
                 </div>
-              </div>
+              </a>
             )
           } )}
         </div>
@@ -203,7 +226,7 @@ var App = React.createClass({
   getInitialState: function() {
     return {
       active: 'videos',
-      ready: false
+      ready: false,
     }
   },
   componentDidMount: function() {
@@ -215,14 +238,14 @@ var App = React.createClass({
     this.setState({ active: active });
   },
   render () {
+    let { active } = this.state;
     return (
       <div className="wrap">
-        <Header active={this.state.active} callback={this.active}/>
+        <Header active={active} callback={this.active}/>
         <div className="main">
-          {this.state.active === "videos" ?
-            <Videos />
-          : <Albums />
-          }
+          { active === "videos" ? <Videos /> : <span/> }
+          { active === "albums" ? <Albums /> : <span/> }
+          { active === "social" ? <Social /> : <span/> }
         </div>
       </div>
     );

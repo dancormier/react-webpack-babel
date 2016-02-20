@@ -186,6 +186,9 @@ html, body, #myApp {
   padding: 0 $paddingGrid $paddingGrid 0;
   width: calc(100% / 3);
 
+  &:hover {
+    text-decoration: none;
+  }
   &.active {
     .video {
       &Link {
@@ -253,6 +256,16 @@ html, body, #myApp {
     }
     .footer {
       display: none;
+    }
+  }
+  .social {
+    line-height: $fontSize*5;
+    padding: $padding;
+    text-align: center;
+
+    &Link {
+      color: #fff;
+      font-size: $fontSize*5;
     }
   }
   .video {

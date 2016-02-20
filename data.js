@@ -16,15 +16,20 @@ var albums = [
 
 var navLinks = [
   {
-    href: "#",
     label: "Videos",
     name: "videos"
   }, {
-    href: "#",
-    label: "Discography",
-    name: "discography"
+    label: "Albums",
+    name: "albums"
   }
 ];
+
+var navLinksMobile = navLinks.concat([
+  {
+    label: "Social",
+    name: "social"
+  }
+]);
 
 var social = [
   {
@@ -89,6 +94,7 @@ var videos = [
 module.exports = {
   albums,
   navLinks,
+  navLinksMobile,
   social,
   videos
 }
