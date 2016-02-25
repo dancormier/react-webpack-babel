@@ -52,6 +52,12 @@ var social = [
 
 var videos = [
   {
+    name: 'vanilla',
+    id: 'e0cwXTL6atI',
+    text: 'Vanilla',
+    album: '',
+    img: require('./img/vanilla.jpg')
+  }, {
     name: 'pedal',
     id: 'HzciuwwOr2k',
     text: 'Pedal',

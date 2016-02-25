@@ -103,10 +103,10 @@ var Videos = React.createClass({
   getInitialState: function() {
     return {
       ready: false,
-      video: 'pedal',
+      video: 'vanilla',
       videoAlbum: '',
-      videoId: 'HzciuwwOr2k',
-      videoName: 'Pedal',
+      videoId: 'e0cwXTL6atI',
+      videoName: 'Vanilla',
       videoOpts: null,
       width: 0
     }
@@ -179,8 +179,9 @@ var Videos = React.createClass({
             var active = self.state.video === video.name ? " active" : "";
             var href = !isMobile ? "#" : "https://www.youtube.com/watch?v="+video.id;
             var target = !isMobile ? "_self" : "_blank";
+            var hide = !isMobile && i > 5;
 
-            return (
+            return hide ? false : (
               <a key={i} className={"video" + active} href={href} target={target}>
                 <div
                   className="videoLink"
