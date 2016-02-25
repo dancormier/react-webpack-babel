@@ -132,12 +132,13 @@ export class Social extends React.Component {
 
 var Videos = React.createClass({
   getInitialState: function() {
+    var video = videos[0];
     return {
       ready: false,
-      video: 'vanilla',
+      video: video.name,
       videoAlbum: '',
-      videoId: 'e0cwXTL6atI',
-      videoName: 'Vanilla',
+      videoId: video.id,
+      videoTitle: video.title,
       videoOpts: null,
       width: 0
     }
@@ -155,13 +156,13 @@ var Videos = React.createClass({
           }
         }
       })
-    }, 200)
+    }, 1000)
   },
   active: function(video) {
     this.setState({
       video: video.name,
       videoId: video.id,
-      videoName: video.text,
+      videoTitle: video.title,
       videoAlbum: video.album
     });
   },
@@ -171,7 +172,7 @@ var Videos = React.createClass({
     var featureDetails = [
       {
         heading: "Now Playing",
-        text: this.state.videoName,
+        text: this.state.videoTitle,
         url: 'https://www.youtube.com/watch?v='+this.state.videoId
       }, {
         heading: "Off the album",
@@ -218,7 +219,7 @@ var Videos = React.createClass({
                   onClick={() => self.active(video)}
                 >
                   <div className="videoText">
-                    { video.text }
+                    { video.title }
                   </div>
                 </div>
               </a>

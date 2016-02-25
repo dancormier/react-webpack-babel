@@ -54,43 +54,43 @@ var videos = [
   {
     name: 'vanilla',
     id: 'e0cwXTL6atI',
-    text: 'Vanilla',
+    title: 'Vanilla',
     album: '',
     img: require('./img/vanilla.jpg')
   }, {
     name: 'pedal',
     id: 'HzciuwwOr2k',
-    text: 'Pedal',
+    title: 'Pedal',
     album: '',
     img: require('./img/pedal.jpg')
   }, {
     name: 'bandaids',
     id: 'GMlVauePrEU',
-    text: 'Bandaids',
+    title: 'Bandaids',
     album: 'hypoxia',
     img: require('./img/bandaids.jpg')
   }, {
     name: 'winds',
     id: 'a7CpqhOF0hM',
-    text: 'Winds',
+    title: 'Winds',
     album: 'Idiosyncrasy',
     img: require('./img/winds.jpg')
   }, {
     name: 'basketcase',
     id: 'wd68CnQy3UQ',
-    text: 'Basket Case',
+    title: 'Basket Case',
     album: 'Idiosyncrasy',
     img: require('./img/basketcase.jpg')
   }, {
     name: 'thesetup',
     id: 'ri_z3AGjxNo',
-    text: 'The Setup',
+    title: 'The Setup',
     album: 'hypoxia',
     img: require('./img/thesetup.jpg')
   }, {
     name: 'rar',
     id: 'CrPr0rQlTrs',
-    text: 'Live at Radio-Active Records',
+    title: 'Live at Radio-Active Records',
     album: '',
     img: require('./img/rar.jpg')
   }
