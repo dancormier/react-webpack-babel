@@ -21,7 +21,18 @@ var isMobile = typeof window.orientation !== 'undefined'
 var Albums = React.createClass({
   getInitialState: function() {
     return {
+      ready: [false, false, false]
     }
+  },
+  componentDidMount: function() {
+    var self = this;
+    albums.map((album, i) => {
+      document.getElementById("album"+i).onload = function() {
+        var ready = self.state.ready;
+        ready[i] = true;
+        self.setState({ ready: ready });
+      }
+    });
   },
   render () {
     var self = this;
@@ -29,8 +40,14 @@ var Albums = React.createClass({
       <Section className="albums">
         {albums.map((album, i) => {
           var url = "https://bandcamp.com/EmbeddedPlayer/album=" + album.id +  "/size=large/bgcol=212225/linkcol=ffffff/transparent=true/";
+          var ready = self.state.ready[i];
           return (
-            <iframe key={i} className="album" src={url} seamless />
+            <span key={i} className={"album album"+(ready ? "Ready" : "Loading")}>
+              <iframe id={"album"+i} className="albumIframe" src={url} seamless />
+              <div className="albumIcon">
+                <i className="icon fa fa-circle-o-notch fa-spin"></i>
+              </div>
+            </span>
           )
         } )}
       </Section>
@@ -99,6 +116,20 @@ export class Section extends React.Component {
   }
 }
 
+export class Social extends React.Component {
+  render () {
+    return (
+      <div className="social">
+        {social.map((link, i) => {
+          return (
+            <a key={i} className="socialLink" href={link.href} target="_blank">{ link.text }</a>
+          )
+        } )}
+      </div>
+    );
+  }
+}
+
 var Videos = React.createClass({
   getInitialState: function() {
     return {
@@ -113,9 +144,7 @@ var Videos = React.createClass({
   },
   componentDidMount: function() {
     var self = this;
-    console.log(Math.abs(self.refs.videosFeature.getBoundingClientRect().height))
     setTimeout(() => {
-      console.log(Math.abs(self.refs.videosFeature.getBoundingClientRect().height))
       self.setState({
         ready: true,
         videoOpts: {
@@ -200,20 +229,6 @@ var Videos = React.createClass({
     );
   }
 });
-
-export class Social extends React.Component {
-  render () {
-    return (
-      <div className="social">
-        {social.map((link, i) => {
-          return (
-            <a key={i} className="socialLink" href={link.href} target="_blank">{ link.text }</a>
-          )
-        } )}
-      </div>
-    );
-  }
-}
 
 var App = React.createClass({
   getInitialState: function() {

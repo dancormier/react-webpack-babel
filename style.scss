@@ -38,9 +38,41 @@ html, body, #myApp {
 }
 
 .album {
+  @include display(flex);
   border: 0;
   height: 100%;
   width: 100%;
+
+  .icon {
+    @include align-self(center);
+    color: $colorBg;
+    font-size: $fontSize;
+    margin: 0 auto;
+  }
+  &Icon {
+    @include display(flex);
+    width: 100%;
+  }
+  &Iframe {
+    border: 0;
+    height: 100%;
+    width: 100%;
+  }
+  &Loading {
+    .album {
+      &Iframe {
+        opacity: 0;
+        margin-right: -100%;
+      }
+    }
+  }
+  &Ready {
+    .album {
+      &Icon {
+        display: none;
+      }
+    }
+  }
 }
 
 .footer {
@@ -186,7 +218,7 @@ html, body, #myApp {
   padding: 0 $paddingGrid $paddingGrid 0;
   width: calc(100% / 3);
 
-  &:hover {
+  &:active, &:focus, &:hover {
     text-decoration: none;
   }
   &.active {
@@ -197,6 +229,9 @@ html, body, #myApp {
         color: #fff;
       }
     }
+  }
+  &.hide {
+    display: none;
   }
 
   &Link {
@@ -238,6 +273,21 @@ html, body, #myApp {
     margin: 0 auto;
     max-width: 700px;
     width: 100%;
+
+    .icon {
+      font-size: $fontSize*5;
+    }
+    &Icon {
+      height: 100%;
+    }
+    &Loading {
+      .album {
+        &Iframe {
+          opacity: 0;
+          margin-bottom: -100%;
+        }
+      }
+    }
   }
   .albums {
     display: block;
