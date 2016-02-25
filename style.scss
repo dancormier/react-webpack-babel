@@ -29,11 +29,30 @@ body {
 }
 
 html, body, #myApp {
+  background-color: $colorBg;
   height: 100%;
   position: relative;
 }
 
 .wf-loading {
+  .header, .main {
+    display: none;
+  }
+  .viewloading {
+    @include display(flex);
+    height: 100%;
+    width: 100%;
+
+    .icon {
+      @include align-self(center);
+      color: $colorPrimary;
+      font-size: $fontSize*3;
+      margin: 0 auto;
+    }
+  }
+}
+
+.viewloading {
   display: none;
 }
 
@@ -267,6 +286,13 @@ html, body, #myApp {
 }
 
 @media (max-width:960px) {
+  .wf-loading {
+    .viewloading {
+      .icon {
+        font-size: $fontSize*7;
+      }
+    }
+  }
   .album {
     display: block;
     height: 100vw;

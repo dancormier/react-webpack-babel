@@ -256,6 +256,9 @@ var App = React.createClass({
           { active === "albums" ? <Albums /> : <span/> }
           { active === "social" ? <Social /> : <span/> }
         </div>
+        <div className="viewloading">
+          <i className="icon fa fa-circle-o-notch fa-spin"></i>
+        </div>
       </div>
     );
   }
