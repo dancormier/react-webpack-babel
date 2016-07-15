@@ -1,4 +1,5 @@
 @import 'bourbon';
+@import url('https://fonts.googleapis.com/css?family=Fjalla+One');
 
 // Mixins
 @mixin text-stroke($color) {
@@ -14,17 +15,17 @@ $colorBg: #18191c;
 $colorBg2: #212225;
 $colorPrimary: #2d2e38;
 $colorHighlight: #4646d5;
-$fontSans: "din-condensed-web", sans-serif;
+$fontSans: "Fjalla One", sans-serif;
 $headerSize: 25%;
 $widthVideo: 100%/3*2;
-$fontSize: 3.7vw;
+$fontSize: 3.4vw;
 $padding: 2vw;
 $paddingGrid: 8px;
 
 body {
   background-color: $colorBg;
   font-family: $fontSans;
-  font-size: 16px;
+  font-size: 12px;
   text-transform: uppercase;
 }
 
@@ -116,8 +117,8 @@ html, body, #myApp {
 
   &Heading {
     color: #fff;
-    font-size: $fontSize*1.3;
-    line-height: $fontSize*1.2;
+    font-size: $fontSize*1.2;
+    line-height: $fontSize*1.3;
   }
 }
 
@@ -129,13 +130,13 @@ html, body, #myApp {
 
 .nav {
   height: 100%;
-  line-height: $fontSize*1.2;
+  line-height: $fontSize*1.1;
   padding-top: $padding/2;
 
   &Link {
     color: $colorPrimary;
     display: block;
-    font-size: $fontSize;
+    font-size: $fontSize*.9;
 
     &:active, &:focus {
       color: inherit;
@@ -326,7 +327,7 @@ html, body, #myApp {
 
     &Heading {
       display: block;
-      font-size: $fontSize*5;
+      font-size: $fontSize*4;
       line-height: $fontSize*2.5;
       padding: 0 0 $padding;
     }
