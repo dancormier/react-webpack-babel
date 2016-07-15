@@ -1,9 +1,9 @@
 @import 'bourbon';
-@import url('https://fonts.googleapis.com/css?family=Montserrat|Crimson+Text');
+@import url('https://fonts.googleapis.com/css?family=Montserrat|Lora');
 
 // Variables
 $fontSans: "Montserrat", sans-serif;
-$fontSerif: "Crimson Text", serif;
+$fontSerif: "Lora", serif;
 $headerSize: 40%;
 $paddingH: 4vw;
 $paddingV: 3vw;
@@ -158,8 +158,8 @@ html, body, #myApp {
   padding: $paddingV $paddingH;
 
   p {
-    font-size: 2.4rem;
-    line-height: 3rem;
+    font-size: 1.8rem;
+    line-height: 3.4rem;
     max-width: $sectionMaxW;
 
     a {
@@ -184,6 +184,7 @@ html, body, #myApp {
     font-family: $fontSans;
     font-size: 4rem;
     font-weight: bold;
+    padding-bottom: $paddingV/2;
     text-transform: uppercase;
   }
 }
